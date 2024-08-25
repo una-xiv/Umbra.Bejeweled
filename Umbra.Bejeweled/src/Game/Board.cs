@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Numerics;
 using FFXIVClientStructs.FFXIV.Client.UI;
 using Umbra.Common;
+using Una.Drawing;
 
 namespace Umbra.Bejeweled.Game;
 
 internal sealed partial class Board(Viewport viewport, Vec2 size)
 {
-    public const int CellSize = 64;
+    public int CellSize => (int)Math.Ceiling(64 * Node.ScaleFactor);
 
     public bool Active     { get; set; }
     public bool EnableSfx  { get; set; } = true;

@@ -35,7 +35,7 @@ internal sealed class Particle(
     protected override void OnDraw(float deltaTime)
     {
         if (_elapsedTime == 0) {
-            int h = Board.CellSize / 2;
+            int h = _board.CellSize / 2;
             int x = new Random().Next(-h, h);
             int y = new Random().Next(-h, h);
 
@@ -47,8 +47,8 @@ internal sealed class Particle(
             _uv1 = new(uvOffset, uvOffset);
             _uv2 = new(1 - uvOffset, 1 - uvOffset);
 
-            _targetPos = _board.Viewport.TopLeft + new Vector2(Board.CellSize, -Board.CellSize);
-            _position = _board.Viewport.TopLeft + SpritePosition + new Vector2(x + h, y + h);
+            _targetPos = _board.Viewport.TopLeft + new Vector2(_board.CellSize,        -_board.CellSize);
+            _position  = _board.Viewport.TopLeft + SpritePosition + new Vector2(x + h, y + h);
 
             Vector2 accelPos1 = Vector2.Normalize(_targetPos - _position);
             Vector2 accelPos2 = new(

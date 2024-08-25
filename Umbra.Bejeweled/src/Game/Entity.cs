@@ -20,8 +20,8 @@ internal abstract class Entity(byte entityType, Board board, Vec2 cellPosition)
     /// Returns the sprite position of the entity.
     /// </summary>
     public Vector2 SpritePosition { get; private set; } = new(
-        Board.CellSize * cellPosition.X,
-        Board.CellSize * cellPosition.Y
+        board.CellSize * cellPosition.X,
+        board.CellSize * cellPosition.Y
     );
 
     /// <summary>
@@ -128,7 +128,7 @@ internal abstract class Entity(byte entityType, Board board, Vec2 cellPosition)
     protected void DrawIcon(uint iconId, int padding = 4)
     {
         Rect r = new Rect(Rect.TopLeft, Rect.BottomRight);
-        r.Shrink(new(padding));
+        r.Shrink(new((int)(padding * Node.ScaleFactor)));
 
         ImGui
             .GetForegroundDrawList()

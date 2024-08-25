@@ -69,8 +69,8 @@ internal sealed partial class BejeweledPopup : WidgetPopup
         }
 
         float   deltaTime   = Framework.Instance()->FrameDeltaTime;
-        Vector2 topLeft     = Node.QuerySelector("#Cell-0-0")!.Bounds.MarginRect.TopLeft;
-        Vector2 bottomRight = Node.QuerySelector("#Cell-9-7")!.Bounds.MarginRect.BottomRight;
+        Vector2 topLeft     = Node.QuerySelector("#Cell-0-0")!.Bounds.ContentRect.TopLeft;
+        Vector2 bottomRight = Node.QuerySelector("#Cell-9-7")!.Bounds.ContentRect.BottomRight;
 
         for (var y = 0; y < 8; y++) {
             for (var x = 0; x < 10; x++) {
