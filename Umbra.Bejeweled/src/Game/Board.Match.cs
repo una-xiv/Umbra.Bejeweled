@@ -189,30 +189,31 @@ internal sealed partial class Board
     /// </summary>
     private byte GetNewGemTypeAt(int x)
     {
-        while (true) {
-            byte gem = PickRandomGemType();
-
-            byte below  = GetGemAt(x,     0);
-            byte below2 = GetGemAt(x,     1);
-            byte left   = GetGemAt(x - 1, 0);
-            byte left2  = GetGemAt(x - 2, 0);
-            byte right  = GetGemAt(x + 1, 0);
-            byte right2 = GetGemAt(x + 2, 0);
-
-            if (gem == below && gem == below2) {
-                continue;
-            }
-
-            if (x >= 2 && gem == left && gem == left2) {
-                continue;
-            }
-
-            if (x < Width - 2 && gem == right && gem == right2) {
-                continue;
-            }
-
-            return gem;
-        }
+        // while (true) {
+        //     byte gem = PickRandomGemType();
+        //
+        //     byte below  = GetGemAt(x,     0);
+        //     byte below2 = GetGemAt(x,     1);
+        //     byte left   = GetGemAt(x - 1, 0);
+        //     byte left2  = GetGemAt(x - 2, 0);
+        //     byte right  = GetGemAt(x + 1, 0);
+        //     byte right2 = GetGemAt(x + 2, 0);
+        //
+        //     if (gem == below && gem == below2) {
+        //         continue;
+        //     }
+        //
+        //     if (x >= 2 && gem == left && gem == left2) {
+        //         continue;
+        //     }
+        //
+        //     if (x < Width - 2 && gem == right && gem == right2) {
+        //         continue;
+        //     }
+        //
+        //     return gem;
+        // }
+        return PickRandomGemType();
     }
 
     /// <summary>

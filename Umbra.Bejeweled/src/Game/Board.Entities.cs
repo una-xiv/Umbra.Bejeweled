@@ -14,12 +14,19 @@ internal sealed partial class Board
     private List<Entity>   DestroyedEntities { get; } = [];
     private List<Particle> Particles         { get; } = [];
 
-    private void SpawnParticlesFor(Entity entity)
+    public void SpawnParticlesFor(Entity entity, int? amount = null, float? lifeTime = null, int? size = null, Vector2? acceleration = null)
     {
-        int amount = new Random().Next(10, 20);
+        amount ??= new Random().Next(10, 20);
 
         for (var i = 0; i < amount; i++) {
-            Particles.Add(new(0, this, entity.CellPosition, new Random().Next(500, 1500), entity.GetIconId()));
+            Particles.Add(new(
+                0,
+                this,
+                entity.CellPosition,
+                lifeTime ?? new Random().Next(500, 1500),
+                entity.GetIconId(),
+                size ?? new Random().Next(2, 5)
+            ));
         }
     }
 

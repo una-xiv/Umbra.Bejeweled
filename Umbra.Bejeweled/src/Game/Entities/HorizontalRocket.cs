@@ -1,8 +1,14 @@
-﻿namespace Umbra.Bejeweled.Game.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.Numerics;
+using ImGuiNET;
+
+namespace Umbra.Bejeweled.Game.Entities;
 
 internal class HorizontalRocket(Board board, Vec2 cellPosition, IconIds iconIds) : Entity(11, board, cellPosition)
 {
-    private readonly Board _board = board;
+    private readonly Board        _board             = board;
+    private readonly List<Entity> _destroyedEntities = [];
 
     private int  _shrinkSize = 4;
     private int  _growSize   = -8;
@@ -28,16 +34,34 @@ internal class HorizontalRocket(Board board, Vec2 cellPosition, IconIds iconIds)
 
             for (var x = 0; x < _board.Width; x++) {
                 if (CellPosition.X == x) continue;
-                _board.ClearCell(new(x, CellPosition.Y));
+                var entity = _board.GetEntityAt(x, CellPosition.Y);
+                if (null != entity) _destroyedEntities.Add(entity);
             }
 
             _board.PlaySound(78);
         }
 
         _shrinkSize++;
-        if (_shrinkSize > 30) return true;
+
+        if (_shrinkSize > 30) {
+            foreach (var e in _destroyedEntities) _board.ClearCell(e.CellPosition);
+            _destroyedEntities.Clear();
+            return true;
+        }
 
         DrawIcon(iconIds.HorizontalRocket, _shrinkSize);
+
+        if (_destroyedEntities.Count > 0) {
+            var     entity = _destroyedEntities[new Random().Next(_destroyedEntities.Count)];
+            Vector2 p1     = new(Rect.TopLeft.X + Rect.Width / 2, Rect.TopLeft.Y + Rect.Height / 2);
+
+            Vector2 p2 = new(
+                entity.Rect.TopLeft.X + new Random().Next(entity.Rect.Width),
+                entity.Rect.TopLeft.Y + new Random().Next(entity.Rect.Height)
+            );
+
+            ImGui.GetForegroundDrawList().AddLine(p1, p2, 0xFFFFFFFF, 2);
+        }
 
         return false;
     }

@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Numerics;
+using ImGuiNET;
 
 namespace Umbra.Bejeweled.Game.Entities;
 
 internal class Bomb(Board board, Vec2 cellPosition, IconIds iconIds) : Entity(10, board, cellPosition)
 {
-    private readonly Board _board = board;
+    private readonly Board        _board             = board;
+    private readonly List<Entity> _destroyedEntities = [];
 
     private int  _shrinkSize = 4;
     private int  _growSize   = -8;
@@ -41,6 +45,8 @@ internal class Bomb(Board board, Vec2 cellPosition, IconIds iconIds) : Entity(10
             for (var y = y1; y <= y2; y++) {
                 for (var x = x1; x <= x2; x++) {
                     if (x == CellPosition.X && y == CellPosition.Y) continue;
+                    var entity = _board.GetEntityAt(x, y);
+                    if (null != entity) _destroyedEntities.Add(entity);
                     _board.ClearCell(new(x, y));
                 }
             }
@@ -49,9 +55,27 @@ internal class Bomb(Board board, Vec2 cellPosition, IconIds iconIds) : Entity(10
         }
 
         _shrinkSize++;
-        if (_shrinkSize > 30) return true;
+
+        if (_shrinkSize > 30) {
+            _destroyedEntities.Clear();
+            return true;
+        }
 
         DrawIcon(iconIds.Bomb, _shrinkSize);
+
+        // Grab a random entity from the destroyed entities list and draw a
+        // little lightning bolt to indicate that the bomb has exploded.
+        if (_destroyedEntities.Count > 0) {
+            var     entity = _destroyedEntities[new Random().Next(_destroyedEntities.Count)];
+            Vector2 p1     = new(Rect.TopLeft.X + Rect.Width / 2, Rect.TopLeft.Y + Rect.Height / 2);
+
+            Vector2 p2 = new(
+                entity.Rect.TopLeft.X + entity.Rect.Width / 2,
+                entity.Rect.TopLeft.Y + entity.Rect.Height / 2
+            );
+
+            ImGui.GetForegroundDrawList().AddLine(p1, p2, 0xFFFFFFFF, 2);
+        }
 
         return false;
     }

@@ -107,7 +107,7 @@ internal sealed partial class Board(Viewport viewport, Vec2 size)
             if (e.IsDestroyed) {
                 if (!DestroyedEntities.Contains(e)) {
                     DestroyedEntities.Add(e);
-                    SpawnParticlesFor(e);
+                    SpawnParticlesFor(e, new Random().Next(25, 50));
                 }
             }
         }

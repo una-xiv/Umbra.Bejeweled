@@ -1,7 +1,4 @@
-﻿using System.Numerics;
-using ImGuiNET;
-
-namespace Umbra.Bejeweled.Game.Entities;
+﻿namespace Umbra.Bejeweled.Game.Entities;
 
 internal class Gem(Board board, Vec2 cellPosition, byte type, IconIds iconIds) : Entity(type, board, cellPosition)
 {
@@ -15,10 +12,6 @@ internal class Gem(Board board, Vec2 cellPosition, byte type, IconIds iconIds) :
         if (_growSize < 4) _growSize = 4;
 
         DrawIcon(GetIconId(), _growSize);
-
-        ImGui
-            .GetForegroundDrawList()
-            .AddText(Rect.TopLeft + new Vector2(5, 5), 0xFFFFFFFF, $"{EntityType}");
     }
 
     /// <inheritdoc/>
