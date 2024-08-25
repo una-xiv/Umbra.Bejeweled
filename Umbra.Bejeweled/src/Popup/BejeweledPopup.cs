@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Numerics;
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.UI;
 using Umbra.Bejeweled.Game;
+using Umbra.Common;
 using Umbra.Widgets;
 using Una.Drawing;
+using Framework = FFXIVClientStructs.FFXIV.Client.System.Framework.Framework;
 
 namespace Umbra.Bejeweled.Popup;
 
 internal sealed partial class BejeweledPopup : WidgetPopup
 {
-    public  uint  Score        { get; set; }
-    public  uint  HiScore      { get; set; }
-    public  bool  Sound        { get; set; } = true;
-    public  Board Board        { get; private set; }
+    public uint   Score   { get; set; }
+    public uint   HiScore { get; set; }
+    public bool   Sound   { get; set; } = true;
+    public Board  Board   { get; private set; }
+    public string Data    { get; set; } = "";
 
     private Vec2? SelectedCell { get; set; }
     private Node? SelectedNode { get; set; }
@@ -42,12 +44,17 @@ internal sealed partial class BejeweledPopup : WidgetPopup
     protected override void OnOpen()
     {
         Board.Active = true;
+
+        if (!string.IsNullOrEmpty(Data)) {
+            Board.Deserialize(Data);
+        }
     }
 
     /// <inheritdoc/>
     protected override void OnClose()
     {
         Board.Active = false;
+        Data         = Board.Serialize();
     }
 
     /// <inheritdoc/>
@@ -185,6 +192,8 @@ internal sealed partial class BejeweledPopup : WidgetPopup
     {
         Score       = 0;
         TargetScore = 0;
+        Data        = string.Empty;
+
         Board.Reset();
 
         foreach (var cell in Node.QuerySelectorAll(".cell")) cell.Style.IsVisible = true;

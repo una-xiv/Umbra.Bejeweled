@@ -40,6 +40,7 @@ internal class RainbowBomb(Board board, Vec2 cellPosition, IconIds iconIds) : En
                         if (gem == null) continue;
                         if (gem.EntityType == type || (gem.EntityType >= 10 && gem.EntityType != EntityType)) {
                             _destroyedEntities.Add(gem);
+                            _board.ClearCell(new(x, y));
                         }
                     }
                 }
@@ -60,10 +61,6 @@ internal class RainbowBomb(Board board, Vec2 cellPosition, IconIds iconIds) : En
             }
 
             if (_frameCounter == 60) {
-                foreach (var e in _destroyedEntities) {
-                    _board.ClearCell(e.CellPosition);
-                }
-
                 _board.PlaySound(78);
                 _destroyedEntities.Clear();
                 return true;

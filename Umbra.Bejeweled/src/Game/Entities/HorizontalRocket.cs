@@ -36,6 +36,7 @@ internal class HorizontalRocket(Board board, Vec2 cellPosition, IconIds iconIds)
                 if (CellPosition.X == x) continue;
                 var entity = _board.GetEntityAt(x, CellPosition.Y);
                 if (null != entity) _destroyedEntities.Add(entity);
+                _board.ClearCell(new(x, CellPosition.Y));
             }
 
             _board.PlaySound(78);
@@ -44,7 +45,6 @@ internal class HorizontalRocket(Board board, Vec2 cellPosition, IconIds iconIds)
         _shrinkSize++;
 
         if (_shrinkSize > 30) {
-            foreach (var e in _destroyedEntities) _board.ClearCell(e.CellPosition);
             _destroyedEntities.Clear();
             return true;
         }

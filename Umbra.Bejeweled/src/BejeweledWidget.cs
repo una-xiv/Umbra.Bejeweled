@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Umbra.Bejeweled.Game;
 using Umbra.Bejeweled.Popup;
 using Umbra.Common;
 using Umbra.Widgets;
@@ -120,6 +121,7 @@ internal sealed class BejeweledWidget(
             ..DefaultToolbarWidgetConfigVariables,
             ..SingleLabelTextOffsetVariables,
             new IntegerWidgetConfigVariable("HiScore", "", null, 0, 0) { IsHidden = true },
+            new StringWidgetConfigVariable("Data", "", null, "", short.MaxValue) { IsHidden = true },
         ];
     }
 
@@ -139,6 +141,16 @@ internal sealed class BejeweledWidget(
         Popup.Board.ColorCount = 2 + _lastDifficulty;
 
         Popup.ResetGame();
+
+        Popup.OnPopupOpen  += OnPopupOpened;
+        Popup.OnPopupClose += OnPopupClosed;
+    }
+
+    protected override void OnDisposed()
+    {
+        Popup.OnPopupOpen  -= OnPopupOpened;
+        Popup.OnPopupClose -= OnPopupClosed;
+        base.OnDisposed();
     }
 
     public override string GetInstanceName()
@@ -177,5 +189,21 @@ internal sealed class BejeweledWidget(
         }
 
         base.OnUpdate();
+    }
+
+    private void OnPopupOpened()
+    {
+        string data = GetConfigValue<string>("Data");
+        if (string.IsNullOrEmpty(data)) return;
+
+        Popup.Board.Deserialize(data);
+    }
+
+    private void OnPopupClosed()
+    {
+        if (Popup.Board.State == GameState.GameOver) return;
+        if (string.IsNullOrEmpty(Popup.Data)) return;
+
+        SetConfigValue("Data", Popup.Data);
     }
 }
