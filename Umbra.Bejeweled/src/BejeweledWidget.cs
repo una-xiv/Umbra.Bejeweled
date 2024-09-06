@@ -155,7 +155,7 @@ internal sealed class BejeweledWidget(
 
     public override string GetInstanceName()
     {
-        return GetConfigValue<string>("ButtonLabel");
+        return $"Bejeweled - ${GetConfigValue<string>("ButtonLabel")}";
     }
 
     protected override void OnUpdate()

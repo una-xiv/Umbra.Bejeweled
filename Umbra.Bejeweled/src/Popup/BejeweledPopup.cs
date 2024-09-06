@@ -63,8 +63,8 @@ internal sealed partial class BejeweledPopup : WidgetPopup
         if (Board.State == GameState.GameOver) {
             foreach (var cell in Node.QuerySelectorAll(".cell")) cell.Style.IsVisible = false;
             Node.QuerySelector("#GameOver")!.Style.IsVisible  = true;
-            Node.QuerySelector("#GameOverScore")!.NodeValue   = $"Score: {Board.Score:N0}";
-            Node.QuerySelector("#GameOverHiScore")!.NodeValue = $"Hi-Score: {HiScore:N0}";
+            Node.QuerySelector("#GameOverScore")!.NodeValue   = $"Score: {I18N.FormatNumber(Board.Score)}";
+            Node.QuerySelector("#GameOverHiScore")!.NodeValue = $"Hi-Score: {I18N.FormatNumber(HiScore)}";
             return;
         }
 
@@ -100,10 +100,10 @@ internal sealed partial class BejeweledPopup : WidgetPopup
         }
 
         Node.QuerySelector("#GameOver")!.Style.IsVisible  = false;
-        Node.QuerySelector("#ScoreNumber")!.NodeValue     = $"Score: {Score:N0}";
-        Node.QuerySelector("#ScoreMultiplier")!.NodeValue = $"x{Board.ScoreMultiplier}";
-        Node.QuerySelector("#HiScore")!.NodeValue         = $"Hi-Score: {HiScore:N0}";
-        Node.QuerySelector("#MovesNumber")!.NodeValue     = $"{Board.Moves}";
+        Node.QuerySelector("#ScoreNumber")!.NodeValue     = $"Score: {I18N.FormatNumber(Score)}";
+        Node.QuerySelector("#ScoreMultiplier")!.NodeValue = $"x{I18N.FormatNumber(Board.ScoreMultiplier)}";
+        Node.QuerySelector("#HiScore")!.NodeValue         = $"Hi-Score: {I18N.FormatNumber(HiScore)}";
+        Node.QuerySelector("#MovesNumber")!.NodeValue     = $"{I18N.FormatNumber(Board.Moves)}";
     }
 
     private void ResetSelection()
