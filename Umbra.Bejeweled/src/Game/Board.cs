@@ -246,6 +246,6 @@ internal sealed partial class Board(Viewport viewport, Vec2 size)
         if (_lastSfxPlayedAt.TryGetValue(id, out long lastPlayedAt) && now - lastPlayedAt < 500) return;
         _lastSfxPlayedAt[id] = now;
 
-        UIModule.PlaySound(id);
+        UIGlobals.PlaySoundEffect(id);
     }
 }

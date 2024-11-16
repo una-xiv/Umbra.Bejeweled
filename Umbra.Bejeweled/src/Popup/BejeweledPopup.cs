@@ -156,7 +156,7 @@ internal sealed partial class BejeweledPopup : WidgetPopup
 
     private void PlaySound(uint soundId)
     {
-        if (Sound) UIModule.PlaySound(soundId);
+        if (Sound) UIGlobals.PlaySoundEffect(soundId);
     }
 
     private void OnCellMouseEnter(Node node)
