@@ -56,8 +56,8 @@ internal class HorizontalRocket(Board board, Vec2 cellPosition, IconIds iconIds)
             Vector2 p1     = new(Rect.TopLeft.X + Rect.Width / 2, Rect.TopLeft.Y + Rect.Height / 2);
 
             Vector2 p2 = new(
-                entity.Rect.TopLeft.X + new Random().Next(entity.Rect.Width),
-                entity.Rect.TopLeft.Y + new Random().Next(entity.Rect.Height)
+                entity.Rect.TopLeft.X + new Random().Next((int)entity.Rect.Width),
+                entity.Rect.TopLeft.Y + new Random().Next((int)entity.Rect.Height)
             );
 
             ImGui.GetForegroundDrawList().AddLine(p1, p2, 0xFFFFFFFF, 2);

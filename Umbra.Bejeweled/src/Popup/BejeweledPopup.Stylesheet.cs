@@ -8,13 +8,15 @@ internal sealed partial class BejeweledPopup
         [
             new(
                 "#Popup",
-                new() {
+                new()
+                {
                     Flow = Flow.Vertical,
                 }
             ),
             new(
                 "#Header",
-                new() {
+                new()
+                {
                     Flow        = Flow.Horizontal,
                     Size        = new(656, 50),
                     BorderColor = new() { Bottom = new("Window.Border") },
@@ -23,23 +25,26 @@ internal sealed partial class BejeweledPopup
             ),
             new(
                 "#Title",
-                new() {
-                    Flow    = Flow.Vertical,
-                    Size    = new(500, 50),
-                    Padding = new(8),
+                new()
+                {
+                    Flow = Flow.Vertical,
+                    Size = new(500, 50),
                 }
             ),
             new(
                 "#Moves",
-                new() {
-                    Anchor = Anchor.MiddleCenter,
-                    Flow   = Flow.Vertical,
-                    Size   = new(0, 36),
+                new()
+                {
+                    Anchor  = Anchor.MiddleCenter,
+                    Flow    = Flow.Vertical,
+                    Size    = new(0, 48),
+                    Padding = new(0, 8),
                 }
             ),
             new(
                 "#MovesNumber",
-                new() {
+                new()
+                {
                     Anchor       = Anchor.TopCenter,
                     TextAlign    = Anchor.TopCenter,
                     FontSize     = 20,
@@ -47,32 +52,35 @@ internal sealed partial class BejeweledPopup
                     OutlineColor = new("Widget.PopupMenuTextOutline"),
                     OutlineSize  = 1,
                     Padding      = new(0, 8),
-                    Stretch      = true,
-                    Margin       = new() { Top = 2 },
+                    AutoSize     = (AutoSize.Grow, AutoSize.Fit),
                 }
             ),
             new(
                 "#MovesLabel",
-                new() {
+                new()
+                {
                     Anchor    = Anchor.TopCenter,
                     TextAlign = Anchor.TopCenter,
                     FontSize  = 11,
                     Color     = new("Widget.PopupMenuTextMuted"),
                     Padding   = new(0, 8),
-                    Stretch   = true,
+                    AutoSize  = (AutoSize.Grow, AutoSize.Fit),
                     Margin    = new() { Top = -2 },
                 }
             ),
             new(
                 "#Score",
-                new() {
-                    Flow = Flow.Horizontal,
-                    Gap  = 2,
+                new()
+                {
+                    Flow    = Flow.Horizontal,
+                    Gap     = 2,
+                    Padding = new(0, 8),
                 }
             ),
             new(
                 "#ScoreNumber",
-                new() {
+                new()
+                {
                     TextAlign    = Anchor.TopLeft,
                     FontSize     = 20,
                     Color        = new("Widget.PopupMenuText"),
@@ -82,7 +90,8 @@ internal sealed partial class BejeweledPopup
             ),
             new(
                 "#ScoreMultiplier",
-                new() {
+                new()
+                {
                     TextAlign    = Anchor.TopLeft,
                     FontSize     = 12,
                     Color        = new("Widget.PopupMenuTextMuted"),
@@ -93,7 +102,8 @@ internal sealed partial class BejeweledPopup
             ),
             new(
                 "#HiScore",
-                new() {
+                new()
+                {
                     Flow         = Flow.Vertical,
                     Size         = new(500, 0),
                     TextAlign    = Anchor.MiddleLeft,
@@ -101,11 +111,13 @@ internal sealed partial class BejeweledPopup
                     Color        = new("Widget.PopupMenuTextMuted"),
                     OutlineColor = new("Widget.PopupMenuTextOutline"),
                     OutlineSize  = 1,
+                    Padding      = new(0, 8),
                 }
             ),
             new(
                 "#Buttons",
-                new() {
+                new()
+                {
                     Anchor  = Anchor.MiddleRight,
                     Padding = new(8),
                     Gap     = 8,
@@ -113,7 +125,8 @@ internal sealed partial class BejeweledPopup
             ),
             new(
                 "#Game",
-                new() {
+                new()
+                {
                     Flow    = Flow.Vertical,
                     Size    = new(656, 530),
                     Padding = new(8),
@@ -125,7 +138,8 @@ internal sealed partial class BejeweledPopup
             ),
             new(
                 ".cell",
-                new() {
+                new()
+                {
                     Size        = new(64, 64),
                     StrokeColor = new("Window.Border"),
                     StrokeWidth = 1,
@@ -133,35 +147,40 @@ internal sealed partial class BejeweledPopup
             ),
             new(
                 ".cell:hover",
-                new() {
+                new()
+                {
                     StrokeColor = new(0xFFFFFFFF),
                     StrokeWidth = 1,
                 }
             ),
             new(
                 ".cell.selected",
-                new() {
+                new()
+                {
                     StrokeColor = new(0xFFFFFFFF),
                     StrokeWidth = 3,
                 }
             ),
             new(
                 ".cell.targeted",
-                new() {
+                new()
+                {
                     StrokeColor = new(0xA0FFFFFF),
                     StrokeWidth = 2,
                 }
             ),
             new(
                 "#GameOver",
-                new() {
+                new()
+                {
                     Flow   = Flow.Vertical,
                     Anchor = Anchor.MiddleCenter,
                 }
             ),
             new(
                 "#GameOverText",
-                new() {
+                new()
+                {
                     Anchor       = Anchor.TopCenter,
                     TextAlign    = Anchor.TopCenter,
                     FontSize     = 32,
@@ -177,7 +196,8 @@ internal sealed partial class BejeweledPopup
             ),
             new(
                 "#GameOverScore",
-                new() {
+                new()
+                {
                     Anchor       = Anchor.TopCenter,
                     TextAlign    = Anchor.TopCenter,
                     FontSize     = 18,
@@ -190,7 +210,8 @@ internal sealed partial class BejeweledPopup
             ),
             new(
                 "#GameOverHiScore",
-                new() {
+                new()
+                {
                     Anchor       = Anchor.TopCenter,
                     TextAlign    = Anchor.TopCenter,
                     FontSize     = 14,

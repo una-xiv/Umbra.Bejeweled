@@ -12,15 +12,22 @@ internal sealed class BejeweledWidget(
     string?                     guid         = null,
     Dictionary<string, object>? configValues = null
 )
-    : DefaultToolbarWidget(info, guid, configValues)
+    : StandardToolbarWidget(info, guid, configValues)
 {
     /// <inheritdoc/>
     public override BejeweledPopup Popup { get; } = new();
+
+    protected override StandardWidgetFeatures Features => 
+        StandardWidgetFeatures.Text |
+        StandardWidgetFeatures.Icon |
+        StandardWidgetFeatures.CustomizableIcon;
 
     /// <inheritdoc/>
     protected override IEnumerable<IWidgetConfigVariable> GetConfigVariables()
     {
         return [
+            ..base.GetConfigVariables(),
+            
             new BooleanWidgetConfigVariable(
                 "EnableSound",
                 "Enable Sound Effects",
@@ -111,15 +118,6 @@ internal sealed class BejeweledWidget(
                 "The label for the button.",
                 Info.Name
             ) { Category = I18N.Translate("Widget.ConfigCategory.WidgetAppearance") },
-            new IntegerWidgetConfigVariable(
-                "ButtonIcon",
-                "Button Icon",
-                "The icon for the button.",
-                14,
-                0
-            ) { Category = I18N.Translate("Widget.ConfigCategory.WidgetAppearance") },
-            ..DefaultToolbarWidgetConfigVariables,
-            ..SingleLabelTextOffsetVariables,
             new IntegerWidgetConfigVariable("HiScore", "", null, 0, 0) { IsHidden = true },
             new StringWidgetConfigVariable("Data", "", null, "", short.MaxValue) { IsHidden = true },
         ];
@@ -129,10 +127,9 @@ internal sealed class BejeweledWidget(
     private int  _lastDifficulty;
 
     /// <inheritdoc/>
-    protected override void Initialize()
+    protected override void OnLoad()
     {
-        SetIcon(14);
-        SetLabel(Info.Name);
+        SetText(Info.Name);
 
         _lastHiScore    = (uint)GetConfigValue<int>("HiScore");
         _lastDifficulty = GetConfigValue<int>("Difficulty");
@@ -146,11 +143,10 @@ internal sealed class BejeweledWidget(
         Popup.OnPopupClose += OnPopupClosed;
     }
 
-    protected override void OnDisposed()
+    protected override void OnUnload()
     {
         Popup.OnPopupOpen  -= OnPopupOpened;
         Popup.OnPopupClose -= OnPopupClosed;
-        base.OnDisposed();
     }
 
     public override string GetInstanceName()
@@ -158,10 +154,9 @@ internal sealed class BejeweledWidget(
         return $"Bejeweled - {GetConfigValue<string>("ButtonLabel")}";
     }
 
-    protected override void OnUpdate()
+    protected override void OnDraw()
     {
-        SetIcon((uint)GetConfigValue<int>("ButtonIcon"));
-        SetLabel(GetConfigValue<string>("ButtonLabel"));
+        SetText(GetConfigValue<string>("ButtonLabel"));
 
         int difficulty = GetConfigValue<int>("Difficulty");
         if (difficulty != _lastDifficulty) {
@@ -187,8 +182,6 @@ internal sealed class BejeweledWidget(
             _lastHiScore = Popup.Board.Score;
             SetConfigValue("HiScore", (int)Popup.HiScore);
         }
-
-        base.OnUpdate();
     }
 
     private void OnPopupOpened()
