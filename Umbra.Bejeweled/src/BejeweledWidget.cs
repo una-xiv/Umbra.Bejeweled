@@ -116,7 +116,9 @@ internal sealed class BejeweledWidget(
                 "ButtonLabel",
                 "Button Label",
                 "The label for the button.",
-                Info.Name
+                Info.Name,
+                4096,
+                true
             ) { Category = I18N.Translate("Widget.ConfigCategory.WidgetAppearance") },
             new IntegerWidgetConfigVariable("HiScore", "", null, 0, 0) { IsHidden = true },
             new StringWidgetConfigVariable("Data", "", null, "", short.MaxValue) { IsHidden = true },
