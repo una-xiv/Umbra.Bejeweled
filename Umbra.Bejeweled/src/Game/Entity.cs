@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
+using Dalamud.Bindings.ImGui;
 using Dalamud.Plugin.Services;
-using ImGuiNET;
 using Umbra.Common;
 using Una.Drawing;
 
@@ -133,7 +133,7 @@ internal abstract class Entity(byte entityType, Board board, Vec2 cellPosition)
         ImGui
             .GetForegroundDrawList()
             .AddImage(
-                TextureProvider.GetFromGameIcon(new(iconId)).GetWrapOrEmpty().ImGuiHandle,
+                TextureProvider.GetFromGameIcon(new(iconId)).GetWrapOrEmpty().Handle,
                 r.TopLeft,
                 r.BottomRight,
                 Vector2.Zero,

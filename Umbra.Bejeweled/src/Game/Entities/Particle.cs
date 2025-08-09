@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Numerics;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 
 namespace Umbra.Bejeweled.Game.Entities;
 
@@ -83,7 +83,7 @@ internal sealed class Particle(
             ImGui
                 .GetForegroundDrawList()
                 .AddImageRounded(
-                    TextureProvider.GetFromGameIcon(new(iconId)).GetWrapOrEmpty().ImGuiHandle,
+                    TextureProvider.GetFromGameIcon(new(iconId)).GetWrapOrEmpty().Handle,
                     _position - new Vector2(size),
                     _position + new Vector2(size),
                     _uv1,
