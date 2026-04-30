@@ -237,7 +237,7 @@ internal sealed partial class Board(Viewport viewport, Vec2 size)
 
     private readonly Dictionary<uint, long> _lastSfxPlayedAt = [];
 
-    public void PlaySound(uint id)
+    public unsafe void PlaySound(uint id)
     {
         if (!EnableSfx || !Active) return;
 
