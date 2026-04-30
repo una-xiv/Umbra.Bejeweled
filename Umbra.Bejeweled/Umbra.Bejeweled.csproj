@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Dalamud.NET.Sdk/14.0.1">
+<Project Sdk="Dalamud.NET.Sdk/15.0.0">
     <PropertyGroup>
 <!--        <UmbraLibPath>Z:\FFXIV-plugins\una-xiv-plugins\Umbra\out\Release\</UmbraLibPath>-->
         <UmbraLibPath>$([System.IO.Directory]::GetDirectories($(appdata)\XIVLauncher\installedPlugins\Umbra\)[0])\</UmbraLibPath>
@@ -13,10 +13,10 @@
     <PropertyGroup>
         <Authors>Una</Authors>
         <Company>Una</Company>
-        <Version>1.1.7</Version>
+        <Version>1.1.8</Version>
         <ProductName>Bejeweled</ProductName>
         <Description>Play a game of Bejeweled while waiting for those bunny fates to spawn.</Description>
-        <Copyright>(C)2025</Copyright>
+        <Copyright>(C)2026</Copyright>
         <PackageProjectUrl>https://github.com/una-xiv/umbra</PackageProjectUrl>
         <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
         <IsPackable>false</IsPackable>

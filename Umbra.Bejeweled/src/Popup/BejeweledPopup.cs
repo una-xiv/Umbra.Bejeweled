@@ -154,7 +154,7 @@ internal sealed partial class BejeweledPopup : WidgetPopup
         }
     }
 
-    private void PlaySound(uint soundId)
+    private unsafe void PlaySound(uint soundId)
     {
         if (Sound) UIGlobals.PlaySoundEffect(soundId);
     }
